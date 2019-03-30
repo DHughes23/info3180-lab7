@@ -27,9 +27,9 @@ const uploadphoto = Vue.component('upload-form', {
         <form id="uploadForm" v-on:submit.prevent="uploadPhoto">
             Description:
             <textarea name="descrip"> </textarea><br>
-            Photo: 
-            <input type="image" name="pic><br>
-            <input type="submit value="Submit">
+            Photo: <br>
+            <input type="file" name="pic"><br><br>
+            <button type=submit > Upload </button>
         </form>
     </div>
     `,
@@ -100,7 +100,7 @@ const router = new VueRouter({
     routes: [
         {path: "/", component: Home},
         // Put other routes here
-
+        {path: "/upload", component: uploadphoto},
         // This is a catch all route in case none of the above matches
         {path: "*", component: NotFound}
     ]

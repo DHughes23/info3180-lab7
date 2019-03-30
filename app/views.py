@@ -30,7 +30,7 @@ def index(path):
     Also we will render the initial webpage and then let VueJS take control.
     """
     return render_template('index.html')
-
+    
 
 # Here we define a function to collect form errors from Flask-WTF
 # which we can later use
@@ -48,7 +48,7 @@ def form_errors(form):
     return error_messages
 
 
-@app.route('/api/upload', methods = ['POST'])
+@app.route('/api/upload')
 def upload():
     
     form = UploadForm()
