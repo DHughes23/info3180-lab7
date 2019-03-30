@@ -12,10 +12,53 @@ Vue.component('app-header', {
           <li class="nav-item active">
             <router-link class="nav-link" to="/">Home <span class="sr-only">(current)</span></router-link>
           </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/upload">Upload Photo <span class="sr-only">(current)</span></router-link>
+          </li>
         </ul>
       </div>
     </nav>
     `
+});
+
+const uploadphoto = Vue.component('upload-form', {
+    template: `
+    <div>
+        <form id="uploadForm" v-on:submit.prevent="uploadPhoto">
+            Description:
+            <textarea name="descrip"> </textarea><br>
+            Photo: 
+            <input type="image" name="pic><br>
+            <input type="submit value="Submit">
+        </form>
+    </div>
+    `,
+    methods:{
+        uploadPhoto: function(){
+            let self = this;
+            let uploadForm = document.getElementById('uploadForm');
+            let form_data = new FormData(uploadForm);
+            
+            fetch("/api/upload", {
+                method: 'POST',
+                body: form_data,
+                headers: {
+                    'X-CSRFToken': token
+                },
+                credentials: 'same-origin'
+            })
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (jsonResponse) {
+                // display a success message
+                console.log(jsonResponse);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        }
+    }
 });
 
 Vue.component('app-footer', {
