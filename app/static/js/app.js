@@ -24,12 +24,12 @@ Vue.component('app-header', {
 const uploadphoto = Vue.component('upload-form', {
     template: `
     <div>
-        <form id="uploadForm" v-on:submit.prevent="uploadPhoto">
+        <form id="uploadForm" enctype=multipart/form-data @submit.prevent="uploadPhoto" method=post>
             Description:
-            <textarea name="descrip"> </textarea><br>
+            <textarea name="descrip" id="des"> </textarea><br>
             Photo: <br>
-            <input type="file" name="pic"><br><br>
-            <button type=submit > Upload </button>
+            <input type="file" name="pic" id="photo"><br><br>
+            <button type=submit class="btn btn-primary" > Upload </button>
         </form>
     </div>
     `,
@@ -42,9 +42,7 @@ const uploadphoto = Vue.component('upload-form', {
             fetch("/api/upload", {
                 method: 'POST',
                 body: form_data,
-                headers: {
-                    'X-CSRFToken': token
-                },
+                headers: {'X-CSRFToken': token},
                 credentials: 'same-origin'
             })
             .then(function (response) {

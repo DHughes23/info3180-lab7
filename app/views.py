@@ -48,7 +48,7 @@ def form_errors(form):
     return error_messages
 
 
-@app.route('/api/upload')
+@app.route('/api/upload', methods=['POST'])
 def upload():
     
     form = UploadForm()
